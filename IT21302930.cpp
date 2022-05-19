@@ -5,7 +5,7 @@ using namespace std;
 #define SIZE 2
 //unregisteredUser class
 class UnregisteredUser{
-	private:
+	protected:
 		char name[20];
 		char email[30];
 		char address[50];
@@ -33,37 +33,45 @@ void UnregisteredUser::regdetails()
 	cout<<"Email :"<<email<<endl;
 	cout<<"Address :"<<address<<endl;
 }
-//order class
-class order {
+
+//registered user class
+class RegisteredUser:public UnregisteredUser {
 	private:
-		int cartId;
+		int userId;
+		char userName[20];
+		char password[20];
 	public:
-		order();
-		order(int ctno);
-		void displayOrderDetails();
-		
+		RegisteredUser();
+		RegisteredUser(int no,const char mname[],const char mpassword[]);
+		void login();
+		void updateAccount();
+		void displayRegisterUserDetails();
 };
-
-//order class implemetation
-order::order(){}
-order::order(int ctno){
-	cartId=ctno;
+//register user class implemetation
+RegisteredUser::RegisteredUser(){}
+RegisteredUser::RegisteredUser(int no,const char mname[],const char mpassword[]){
+	userId=no;
+	strcpy(userName,mname);
+	strcpy(password,mpassword);
 }
-
-void order::displayOrderDetails(){
-	cout<<"Order ID :"<<cartId<<endl;
+void RegisteredUser::login(){}
+void RegisteredUser::updateAccount(){}
+void RegisteredUser::displayRegisterUserDetails(){
+	cout<<"User ID :"<<userId<<endl;
+	cout<<"Name:"<<userName<<endl;
+	cout<<"Password:"<<password<<endl;
 	
 }
 //main program
-int main (){
-	UnregisteredUser*u;
+int main(){
+		UnregisteredUser*u;
 	u=new UnregisteredUser("Sasrika Neewin","sasri2001@gmail","New york,America" );
 	u->regdetails();
 	cout<<endl;
 	
-	order*odr1;
-	odr1=new order(888);
-	odr1->displayOrderDetails();
+	RegisteredUser *r1;
+	r1=new RegisteredUser(111,"Nimal_03","**********");
+	r1->displayRegisterUserDetails();
 	cout<<endl;
 	
 	return 0;
